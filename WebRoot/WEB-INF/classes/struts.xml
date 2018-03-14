@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+    <constant name="struts.i18n.encoding" value="utf-8"/>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.ui.theme" value="simple" />
+  
+   <package name="default" extends="struts-default">
+          <interceptors>
+              <interceptor name="LoginInterceptors" class="com.intermediary.util.LoginInterceptors">
+                <param name="excludeName">customer_login2,customer_reg,customer_showEdit</param>
+                <param name="sessionName">customer</param>
+              </interceptor>
+              
+              <interceptor-stack name="myInterceptors">
+                 <interceptor-ref name="defaultStack"></interceptor-ref>
+                 <interceptor-ref name="LoginInterceptors"/>
+              </interceptor-stack>
+          </interceptors>
+          
+          <default-interceptor-ref name="myInterceptors"></default-interceptor-ref>
+          
+          <global-results>
+              <result name="login" type="redirect">/login.jsp</result>
+              <result name="success" type="redirect">${prePage}</result>
+          </global-results>  
+    
+    
+    </package>
+    
+    
+    <package name="customer" namespace="/customer" extends="default">
+         <action name="customer_*" class="customerAction" method="{1}">
+            <result name="message">/index.jsp</result>
+            <result name="show_view">/main.jsp</result>
+            <result name="reg">/welcome.jsp</result>
+            <result name="input">/login.jsp</result>
+            <result name="success">/main.jsp</result>
+            <result name="fail">/reg.jsp</result>
+            <result name="customer_updatamessage">/Customer_updatamessage.jsp</result>
+            <result name="main">/Customer_message.jsp</result>
+            
+         </action>
+    </package>
+    
+    <package name="message" namespace="/message" extends="default">
+          <action name="message_*" class="messageAction" method="{1}">
+             <result name="ccc">/main.jsp</result>
+             <result name="one">/companyMessage.jsp</result>
+             <result name="two">/updataMessage.jsp</result>
+             <result name="show_view">/companySearch.jsp</result>
+             <result name="success">/success.jsp</result>
+          </action>
+    </package>
+    
+     <package name="main" namespace="/main" extends="default">
+          <action name="main_*" class="mainAction" method="{1}">
+             <result name="re">/main.jsp</result>
+          </action>
+    </package>
+    
+    <package name="customerorder" namespace="/customerorder" extends="default">
+          <action name="customerorder_*" class="customerorderAction" method="{1}">
+             <result name="success2">/success2.jsp</result>
+             <result name="ed">/Order_main.jsp</result>
+          </action>
+    </package>
+    
+    <!--     <package name="customer" namespace="/customer" extends="struts-default">
+         <action name="customer_*" class="customerAction" method="{1}">
+            <result name="message">/index.jsp</result>
+            <result name="show_view">/index.jsp</result>
+          <result name="reg">/reg.jsp</result>
+         </action>
+    </package> -->
+</struts>

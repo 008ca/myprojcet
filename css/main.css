@@ -1,0 +1,24 @@
+main{
+	 float:left;
+	 background:#924546;
+	 height: 1000px;
+	 width:10%;
+}
+main2{
+	float:left;
+	height: 1000px;
+	margin-left:10px;
+	width: 89%;
+	background: #D32628;
+}
+
+.acount img{
+	margin-left: atuo;
+	margin-right:atuo;
+	margin-top:10;	height:20%;
+	
+}
+
+main .logo{
+	background:#32CD32;
+}
